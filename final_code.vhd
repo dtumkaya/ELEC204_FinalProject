@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    
+-- Create Date:    10:02:05 06/07/2022 
 -- Design Name: 
 -- Module Name:    final_code - Behavioral 
 -- Project Name: 
@@ -33,10 +33,6 @@ use IEEE.NUMERIC_STD.ALL;
 entity final_code is
 	Port ( hundhz : in STD_LOGIC;
 				  enter : in STD_LOGIC;
-				  obesity : out STD_LOGIC;
-				  overweight : out STD_LOGIC;
-				  normalweight : out STD_LOGIC;
-				  weak : out STD_LOGIC;
 				  input1 : in  STD_LOGIC_VECTOR (3 downto 0);
 				  input2 : in  STD_LOGIC_VECTOR (3 downto 0);
 				  input3 : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -53,8 +49,6 @@ signal average : integer := 0;
 signal result_temp : integer := 0;
 
 signal r_max : integer := 0;
-signal bmi_int : integer := 0;
-signal h_2 : integer := 0;
 signal q : integer := 0;
 
 begin
