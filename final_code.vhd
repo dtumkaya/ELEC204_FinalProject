@@ -39,45 +39,41 @@ entity final_code is
 				  result : out  STD_LOGIC_VECTOR (15 downto 0);
 				  mint:  out  STD_LOGIC_VECTOR (15 downto 0);
 				  maxt:  out  STD_LOGIC_VECTOR (15 downto 0);
+				  medt:  out  STD_LOGIC_VECTOR (15 downto 0);
 				  ranget:  out  STD_LOGIC_VECTOR (15 downto 0));
 end final_code;
 
 architecture Behavioral of final_code is
-
-
-signal r : integer :=  0 ;
 signal count : integer := 3 ;
 signal average : integer := 0;
 signal result_temp : integer := 0;
 signal min_temp : integer := 0;
 signal max_temp : integer := 0;
+signal med_temp : integer := 0;
 signal range_temp : integer := 0;
 signal q : integer := 0;
-
 
 shared variable in1_int : integer ; 
 shared variable in2_int : integer ; 
 shared variable in3_int : integer ; 
 
 shared variable range_int : integer:= 0 ; 
-shared variable min_int : integer := 16;
-shared variable max_int : integer := -1;
+shared variable min_int : integer := 0;
+shared variable max_int : integer := 0;
+shared variable med_int : integer := 0;
+shared variable result_int : integer := 0; 
 
 begin
 
 process(Clock)
-variable result_int : integer := 0 ; 
-variable n: integer := 0;
-
 begin
-
+		in1_int := to_integer(unsigned(input1));
+		in2_int := to_integer(unsigned(input2));
+		in3_int := to_integer(unsigned(input3));
+		
 if(rising_edge(Clock)) then
 
 		if(average = 0) then
-			in1_int := to_integer(unsigned(input1));
-			in2_int := to_integer(unsigned(input2));
-			in3_int := to_integer(unsigned(input3));
-			
 			result_int := in1_int + in2_int + in3_int;
 			average <= 1;
 			
@@ -96,48 +92,43 @@ if(rising_edge(Clock)) then
 		end if;
 	
 end if;
-result <= std_logic_vector(to_unsigned(result_temp, 16));
 
 
 if(rising_edge(Clock)) then
-	if(r=0) then 
-			if(in1_int>max_int) then
-				max_int := in1_int;
-			elsif(in2_int>max_int) then
-				max_int := in2_int;
-			elsif (in3_int>max_int) then
-				max_int := in3_int;
-			else
-				max_temp <= max_int;
-				r<=1;
-			end if;
+	min_int := in1_int;
+	med_int := in2_int;
+	max_int := in3_int;
+	
+	if(min_int > med_int) then
+		med_int := in1_int;
+		min_int := in2_int;
 	end if;
-			
-	if (r=1) then 
-			if(in1_int<min_int) then
-				min_int := in1_int;
-			elsif(in2_int<min_int) then
-				min_int := in2_int;
-			elsif (in3_int<min_int) then
-				min_int := in3_int;
-			else
-				min_temp <= min_int;
-				r<=2;
-			end if;
+	
+	if(med_int > max_int) then
+		max_int := med_int;
+		med_int := in3_int;
+		if(min_int > med_int) then
+			med_int := min_int;
+			min_int:= in3_int;
+		end if;
 	end if;
-				
-	if (r=2) then
-			range_int := max_temp - min_temp;
-			range_temp<= range_int;
-			r<=0;		
-	end if;
+	
+	max_temp <= max_int;
+	min_temp <= min_int;
+	med_temp <= med_int;
+	
+	range_int := max_int - min_int;
+	range_temp <= range_int;
 end if;
 
 maxt <= std_logic_vector(to_unsigned(max_temp, 16));
 mint <= std_logic_vector(to_unsigned(min_temp, 16));
+medt <= std_logic_vector(to_unsigned(med_temp, 16));
 ranget <= std_logic_vector(to_unsigned(range_temp, 16));
-
+result <= std_logic_vector(to_unsigned(result_temp, 16));
 		
-end process;
+end process;	
+
+
 
 end Behavioral;
