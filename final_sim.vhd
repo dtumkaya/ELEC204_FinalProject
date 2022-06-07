@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   
+-- Create Date:   10:22:33 06/07/2022
 -- Design Name:   
 -- Module Name:   C:/Users/demet/final_project/final_sim.vhd
 -- Project Name:  final_project
@@ -43,10 +43,6 @@ ARCHITECTURE behavior OF final_sim IS
     PORT(
          hundhz : IN  std_logic;
          enter : IN  std_logic;
-         obesity : OUT  std_logic;
-         overweight : OUT  std_logic;
-         normalweight : OUT  std_logic;
-         weak : OUT  std_logic;
          input1 : IN  std_logic_vector(3 downto 0);
          input2 : IN  std_logic_vector(3 downto 0);
          input3 : IN  std_logic_vector(3 downto 0);
@@ -63,10 +59,6 @@ ARCHITECTURE behavior OF final_sim IS
    signal input3 : std_logic_vector(3 downto 0) := (others => '0');
 
  	--Outputs
-   signal obesity : std_logic;
-   signal overweight : std_logic;
-   signal normalweight : std_logic;
-   signal weak : std_logic;
    signal result : std_logic_vector(15 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
@@ -79,10 +71,6 @@ BEGIN
    uut: final_code PORT MAP (
           hundhz => hundhz,
           enter => enter,
-          obesity => obesity,
-          overweight => overweight,
-          normalweight => normalweight,
-          weak => weak,
           input1 => input1,
           input2 => input2,
           input3 => input3,
