@@ -38,7 +38,8 @@ entity final_code is
 				  input3 : in  STD_LOGIC_VECTOR (3 downto 0);
 				  result : out  STD_LOGIC_VECTOR (15 downto 0);
 				  mint:  out  STD_LOGIC_VECTOR (15 downto 0);
-				  maxt:  out  STD_LOGIC_VECTOR (15 downto 0));
+				  maxt:  out  STD_LOGIC_VECTOR (15 downto 0);
+				  ranget:  out  STD_LOGIC_VECTOR (15 downto 0));
 end final_code;
 
 architecture Behavioral of final_code is
@@ -50,6 +51,7 @@ signal average : integer := 0;
 signal result_temp : integer := 0;
 signal min_temp : integer := 0;
 signal max_temp : integer := 0;
+signal range_temp : integer := 0;
 signal q : integer := 0;
 
 
@@ -57,6 +59,7 @@ shared variable in1_int : integer ;
 shared variable in2_int : integer ; 
 shared variable in3_int : integer ; 
 
+shared variable range_int : integer:= 0; 
 shared variable min_int : integer := 15;
 shared variable max_int : integer := 0;
 
@@ -96,7 +99,7 @@ end if;
 result <= std_logic_vector(to_unsigned(result_temp, 16));
 end process;
 
-process(Clock) -- not working, instead use r parameter to change (problem: clock!)
+process(Clock)
 begin
 if(falling_edge(Clock)) then
 			if(in1_int>max_int) then
@@ -108,12 +111,13 @@ if(falling_edge(Clock)) then
 			else
 				max_temp <= max_int;
 			end if;
+			
 			maxt <= std_logic_vector(to_unsigned(max_temp, 16));
 
 	
 end if;
 
-if(rising_edge(Clock)) then
+if(falling_edge(Clock)) then
 		
 			if(in1_int<min_int) then
 				min_int := in1_int;
@@ -127,6 +131,13 @@ if(rising_edge(Clock)) then
 			
 			mint <= std_logic_vector(to_unsigned(min_temp, 16));
 		
+end if;
+
+if(rising_edge(Clock)) then
+		
+			range_int := max_temp - min_temp;
+			range_temp<= range_int;
+			ranget <= std_logic_vector(to_unsigned(range_temp, 16));
 end if;
 
 		
