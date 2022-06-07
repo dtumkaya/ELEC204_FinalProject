@@ -41,18 +41,21 @@ ARCHITECTURE behavior OF final_sim IS
  
     COMPONENT final_code
     PORT(
-         hundhz : IN  std_logic;
+         Clock : IN  std_logic;
          enter : IN  std_logic;
          input1 : IN  std_logic_vector(3 downto 0);
          input2 : IN  std_logic_vector(3 downto 0);
          input3 : IN  std_logic_vector(3 downto 0);
-         result : OUT  std_logic_vector(15 downto 0)
+         result : OUT  std_logic_vector(15 downto 0);
+			mint : OUT  std_logic_vector(15 downto 0);
+			maxt : OUT  std_logic_vector(15 downto 0);
+			ranget : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal hundhz : std_logic := '0';
+   signal Clock : std_logic := '0';
    signal enter : std_logic := '0';
    signal input1 : std_logic_vector(3 downto 0) := (others => '0');
    signal input2 : std_logic_vector(3 downto 0) := (others => '0');
@@ -60,30 +63,36 @@ ARCHITECTURE behavior OF final_sim IS
 
  	--Outputs
    signal result : std_logic_vector(15 downto 0);
+	signal mint : std_logic_vector(15 downto 0);
+	signal maxt : std_logic_vector(15 downto 0);
+	signal ranget : std_logic_vector(15 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-   constant hundhz_period : time := 10 ns;
+   constant Clock_period : time := 100 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: final_code PORT MAP (
-          hundhz => hundhz,
+          Clock => Clock,
           enter => enter,
           input1 => input1,
           input2 => input2,
           input3 => input3,
-          result => result
+          result => result,
+			 maxt => maxt,
+			 mint => mint,
+			 ranget => ranget
         );
 
    -- Clock process definitions
-   hundhz_process :process
+   Clock_process :process
    begin
-		hundhz <= '0';
-		wait for hundhz_period/2;
-		hundhz <= '1';
-		wait for hundhz_period/2;
+		Clock <= '0';
+		wait for Clock_period/2;
+		Clock <= '1';
+		wait for Clock_period/2;
    end process;
  
 
@@ -93,33 +102,15 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-      wait for hundhz_period*10;
+      wait for Clock_period;
 		
 		enter <= '1';
-		
-		wait for hundhz_period*10;
 		
 		input1 <= "0001";
 		input2 <= "0101";
 		input3 <= "0011";
 
-		
-		wait for hundhz_period*10;
-		wait for hundhz_period*10;
-		wait for hundhz_period*10;
-		
-		input1 <= "0010";
-		input2 <= "0100";
-		input3 <= "0010";
-		
-		wait for hundhz_period*10;
-		wait for hundhz_period*10;
-		wait for hundhz_period*10;
-		
-				
-		input1 <= "0001";
-		input2 <= "0010";
-		input3 <= "0100";
+		wait for Clock_period;
 		
 
       -- insert stimulus here 
