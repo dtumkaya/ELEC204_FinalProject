@@ -49,6 +49,7 @@ ARCHITECTURE behavior OF final_sim IS
          result : OUT  std_logic_vector(15 downto 0);
 			mint : OUT  std_logic_vector(15 downto 0);
 			maxt : OUT  std_logic_vector(15 downto 0);
+			medt : OUT  std_logic_vector(15 downto 0);
 			ranget : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
@@ -65,6 +66,7 @@ ARCHITECTURE behavior OF final_sim IS
    signal result : std_logic_vector(15 downto 0);
 	signal mint : std_logic_vector(15 downto 0);
 	signal maxt : std_logic_vector(15 downto 0);
+	signal medt : std_logic_vector(15 downto 0);
 	signal ranget : std_logic_vector(15 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
@@ -83,6 +85,7 @@ BEGIN
           result => result,
 			 maxt => maxt,
 			 mint => mint,
+			 medt => medt,
 			 ranget => ranget
         );
 
@@ -90,9 +93,9 @@ BEGIN
    Clock_process :process
    begin
 		Clock <= '0';
-		wait for Clock_period/2;
+		wait for Clock_period/10;
 		Clock <= '1';
-		wait for Clock_period/2;
+		wait for Clock_period/10;
    end process;
  
 
@@ -100,18 +103,23 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 100 ns;	
-
-      wait for Clock_period;
-		
+				
 		enter <= '1';
-		
 		input1 <= "0001";
 		input2 <= "0101";
 		input3 <= "0011";
 
-		wait for Clock_period;
+		wait for 250 ns;
 		
+		input1 <= "0010";
+		input2 <= "0011";
+		input3 <= "1000";
+		
+		wait for 250 ns;
+		
+		input1 <= "1111";
+		input2 <= "1111";
+		input3 <= "1111";
 
       -- insert stimulus here 
 
