@@ -59,9 +59,9 @@ shared variable in1_int : integer ;
 shared variable in2_int : integer ; 
 shared variable in3_int : integer ; 
 
-shared variable range_int : integer:= 0; 
-shared variable min_int : integer := 15;
-shared variable max_int : integer := 0;
+shared variable range_int : integer:= 0 ; 
+shared variable min_int : integer := 16;
+shared variable max_int : integer := -1;
 
 begin
 
@@ -97,11 +97,10 @@ if(rising_edge(Clock)) then
 	
 end if;
 result <= std_logic_vector(to_unsigned(result_temp, 16));
-end process;
 
-process(Clock)
-begin
-if(falling_edge(Clock)) then
+
+if(rising_edge(Clock)) then
+	if(r=0) then 
 			if(in1_int>max_int) then
 				max_int := in1_int;
 			elsif(in2_int>max_int) then
@@ -110,15 +109,11 @@ if(falling_edge(Clock)) then
 				max_int := in3_int;
 			else
 				max_temp <= max_int;
+				r<=1;
 			end if;
+	end if;
 			
-			maxt <= std_logic_vector(to_unsigned(max_temp, 16));
-
-	
-end if;
-
-if(falling_edge(Clock)) then
-		
+	if (r=1) then 
 			if(in1_int<min_int) then
 				min_int := in1_int;
 			elsif(in2_int<min_int) then
@@ -127,22 +122,22 @@ if(falling_edge(Clock)) then
 				min_int := in3_int;
 			else
 				min_temp <= min_int;
+				r<=2;
 			end if;
-			
-			mint <= std_logic_vector(to_unsigned(min_temp, 16));
-		
-end if;
-
-if(rising_edge(Clock)) then
-		
+	end if;
+				
+	if (r=2) then
 			range_int := max_temp - min_temp;
 			range_temp<= range_int;
-			ranget <= std_logic_vector(to_unsigned(range_temp, 16));
+			r<=0;		
+	end if;
 end if;
 
+maxt <= std_logic_vector(to_unsigned(max_temp, 16));
+mint <= std_logic_vector(to_unsigned(min_temp, 16));
+ranget <= std_logic_vector(to_unsigned(range_temp, 16));
+
 		
-end process;	
-
-
+end process;
 
 end Behavioral;
