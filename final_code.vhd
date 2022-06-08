@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: Koç University
+-- Engineer: Demet Tümkaya, Mahmut Esat Pişkin
 -- 
 -- Create Date:    10:02:05 06/07/2022 
 -- Design Name: 
 -- Module Name:    final_code - Behavioral 
--- Project Name: 
+-- Project Name: Magical LEDs of Statistics
 -- Target Devices: 
 -- Tool versions: 
 -- Description: 
