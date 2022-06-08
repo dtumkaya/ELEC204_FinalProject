@@ -46,11 +46,11 @@ ARCHITECTURE behavior OF final_sim IS
          input1 : IN  std_logic_vector(3 downto 0);
          input2 : IN  std_logic_vector(3 downto 0);
          input3 : IN  std_logic_vector(3 downto 0);
-         result : OUT  std_logic_vector(15 downto 0);
-			mint : OUT  std_logic_vector(15 downto 0);
-			maxt : OUT  std_logic_vector(15 downto 0);
-			medt : OUT  std_logic_vector(15 downto 0);
-			ranget : OUT  std_logic_vector(15 downto 0)
+         result : OUT  std_logic_vector(3 downto 0);
+			mint : OUT  std_logic_vector(3 downto 0);
+			maxt : OUT  std_logic_vector(3 downto 0);
+			medt : OUT  std_logic_vector(3 downto 0);
+			ranget : OUT  std_logic_vector(3 downto 0)
         );
     END COMPONENT;
     
@@ -63,11 +63,11 @@ ARCHITECTURE behavior OF final_sim IS
    signal input3 : std_logic_vector(3 downto 0) := (others => '0');
 
  	--Outputs
-   signal result : std_logic_vector(15 downto 0);
-	signal mint : std_logic_vector(15 downto 0);
-	signal maxt : std_logic_vector(15 downto 0);
-	signal medt : std_logic_vector(15 downto 0);
-	signal ranget : std_logic_vector(15 downto 0);
+   signal result : std_logic_vector(3 downto 0);
+	signal mint : std_logic_vector(3 downto 0);
+	signal maxt : std_logic_vector(3 downto 0);
+	signal medt : std_logic_vector(3 downto 0);
+	signal ranget : std_logic_vector(3 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
