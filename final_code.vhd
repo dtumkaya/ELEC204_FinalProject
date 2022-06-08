@@ -36,11 +36,11 @@ entity final_code is
 				  input1 : in  STD_LOGIC_VECTOR (3 downto 0);
 				  input2 : in  STD_LOGIC_VECTOR (3 downto 0);
 				  input3 : in  STD_LOGIC_VECTOR (3 downto 0);
-				  result : out  STD_LOGIC_VECTOR (15 downto 0);
-				  mint:  out  STD_LOGIC_VECTOR (15 downto 0);
-				  maxt:  out  STD_LOGIC_VECTOR (15 downto 0);
-				  medt:  out  STD_LOGIC_VECTOR (15 downto 0);
-				  ranget:  out  STD_LOGIC_VECTOR (15 downto 0));
+				  result : out  STD_LOGIC_VECTOR (3 downto 0);
+				  mint:  out  STD_LOGIC_VECTOR (3 downto 0);
+				  maxt:  out  STD_LOGIC_VECTOR (3 downto 0);
+				  medt:  out  STD_LOGIC_VECTOR (3 downto 0);
+				  ranget:  out  STD_LOGIC_VECTOR (3 downto 0));
 end final_code;
 
 architecture Behavioral of final_code is
@@ -126,11 +126,11 @@ if(rising_edge(Clock)) then
 	range_temp := range_int;
 end if;
 
-maxt <= std_logic_vector(to_unsigned(max_temp, 16));
-mint <= std_logic_vector(to_unsigned(min_temp, 16));
-medt <= std_logic_vector(to_unsigned(med_temp, 16));
-ranget <= std_logic_vector(to_unsigned(range_temp, 16));
-result <= std_logic_vector(to_unsigned(result_temp, 16));
+maxt <= std_logic_vector(to_unsigned(max_temp, 4));
+mint <= std_logic_vector(to_unsigned(min_temp, 4));
+medt <= std_logic_vector(to_unsigned(med_temp, 4));
+ranget <= std_logic_vector(to_unsigned(range_temp, 4));
+result <= std_logic_vector(to_unsigned(result_temp, 4));
 		
 end process;	
 
