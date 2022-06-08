@@ -46,11 +46,11 @@ end final_code;
 architecture Behavioral of final_code is
 signal count : integer := 3 ;
 signal average : integer := 0;
-signal result_temp : integer := 0;
-signal min_temp : integer := 0;
-signal max_temp : integer := 0;
-signal med_temp : integer := 0;
-signal range_temp : integer := 0;
+shared variable result_temp : integer := 0;
+shared variable min_temp : integer := 0;
+shared variable max_temp : integer := 0;
+shared variable med_temp : integer := 0;
+shared variable range_temp : integer := 0;
 signal q : integer := 0;
 
 shared variable in1_int : integer ; 
@@ -63,6 +63,7 @@ shared variable max_int : integer := 0;
 shared variable med_int : integer := 0;
 shared variable result_int : integer := 0; 
 
+
 begin
 
 process(Clock)
@@ -71,26 +72,28 @@ begin
 		in2_int := to_integer(unsigned(input2));
 		in3_int := to_integer(unsigned(input3));
 		
-if(rising_edge(Clock)) then
+if(rising_edge(Clock)) then		
 
 		if(average = 0) then
 			result_int := in1_int + in2_int + in3_int;
-			average <= 1;
+			average <= 1;		
 			
 		elsif (average = 1) then
+		
 			if (result_int > count) then
+			
 				result_int := result_int - count;
-				q <= q+1;
+				q <= q+1;		
 			elsif (result_int = count) then
+			
 				result_int := result_int - count;
-				q <= q+1;
+				q <= q+1;	
 			else
-				result_temp <= q;
+				result_temp := q;
 				q <= 0;
 				average <= 0;
 			end if;
 		end if;
-	
 end if;
 
 
@@ -102,23 +105,25 @@ if(rising_edge(Clock)) then
 	if(min_int > med_int) then
 		med_int := in1_int;
 		min_int := in2_int;
+		
 	end if;
 	
 	if(med_int > max_int) then
 		max_int := med_int;
 		med_int := in3_int;
+		
 		if(min_int > med_int) then
 			med_int := min_int;
 			min_int:= in3_int;
+			
 		end if;
 	end if;
 	
-	max_temp <= max_int;
-	min_temp <= min_int;
-	med_temp <= med_int;
-	
+	max_temp := max_int;
+	min_temp := min_int;
+	med_temp := med_int;
 	range_int := max_int - min_int;
-	range_temp <= range_int;
+	range_temp := range_int;
 end if;
 
 maxt <= std_logic_vector(to_unsigned(max_temp, 16));
@@ -128,7 +133,5 @@ ranget <= std_logic_vector(to_unsigned(range_temp, 16));
 result <= std_logic_vector(to_unsigned(result_temp, 16));
 		
 end process;	
-
-
 
 end Behavioral;
