@@ -1,10 +1,10 @@
 --------------------------------------------------------------------------------
--- Company: 
--- Engineer:
+-- Company: Koç University
+-- Engineer: Demet Tümkaya, Mahmut Esat Pişkin
 --
 -- Create Date:   10:22:33 06/07/2022
 -- Design Name:   
--- Module Name:   C:/Users/demet/final_project/final_sim.vhd
+-- Module Name:   
 -- Project Name:  final_project
 -- Target Device:  
 -- Tool versions:  
