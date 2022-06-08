@@ -46,7 +46,6 @@ ARCHITECTURE behavior OF final_sim IS
          input1 : IN  std_logic_vector(3 downto 0);
          input2 : IN  std_logic_vector(3 downto 0);
          input3 : IN  std_logic_vector(3 downto 0);
-			valid : out std_logic;
          result : OUT  std_logic_vector(15 downto 0);
 			mint : OUT  std_logic_vector(15 downto 0);
 			maxt : OUT  std_logic_vector(15 downto 0);
@@ -64,7 +63,6 @@ ARCHITECTURE behavior OF final_sim IS
    signal input3 : std_logic_vector(3 downto 0) := (others => '0');
 
  	--Outputs
-	signal valid : std_logic;
    signal result : std_logic_vector(15 downto 0);
 	signal mint : std_logic_vector(15 downto 0);
 	signal maxt : std_logic_vector(15 downto 0);
@@ -84,7 +82,6 @@ BEGIN
           input1 => input1,
           input2 => input2,
           input3 => input3,
-			 valid => valid,
           result => result,
 			 maxt => maxt,
 			 mint => mint,
