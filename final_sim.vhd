@@ -46,6 +46,7 @@ ARCHITECTURE behavior OF final_sim IS
          input1 : IN  std_logic_vector(3 downto 0);
          input2 : IN  std_logic_vector(3 downto 0);
          input3 : IN  std_logic_vector(3 downto 0);
+			valid : out std_logic;
          result : OUT  std_logic_vector(15 downto 0);
 			mint : OUT  std_logic_vector(15 downto 0);
 			maxt : OUT  std_logic_vector(15 downto 0);
@@ -63,6 +64,7 @@ ARCHITECTURE behavior OF final_sim IS
    signal input3 : std_logic_vector(3 downto 0) := (others => '0');
 
  	--Outputs
+	signal valid : std_logic;
    signal result : std_logic_vector(15 downto 0);
 	signal mint : std_logic_vector(15 downto 0);
 	signal maxt : std_logic_vector(15 downto 0);
@@ -82,6 +84,7 @@ BEGIN
           input1 => input1,
           input2 => input2,
           input3 => input3,
+			 valid => valid,
           result => result,
 			 maxt => maxt,
 			 mint => mint,
@@ -106,20 +109,20 @@ BEGIN
 				
 		enter <= '1';
 		input1 <= "0001";
-		input2 <= "0101";
+		input2 <= "0010";
 		input3 <= "0011";
 
 		wait for 250 ns;
 		
-		input1 <= "0010";
-		input2 <= "0011";
-		input3 <= "1000";
+		input1 <= "0100";
+		input2 <= "0101";
+		input3 <= "0110";
 		
 		wait for 250 ns;
 		
-		input1 <= "1111";
-		input2 <= "1111";
-		input3 <= "1111";
+		input1 <= "0111";
+		input2 <= "1000";
+		input3 <= "1001";
 
       -- insert stimulus here 
 
