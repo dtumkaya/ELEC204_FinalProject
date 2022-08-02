@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
--- Company: KoÃ§ University
--- Engineer: Demet TÃ¼mkaya, Mahmut Esat PiÅŸkin
+-- Company: Koç University
+-- Engineer: Demet Tümkaya, Mahmut Esat Piþkin
 -- 
 -- Project Name:  ELEC204 - Magical LEDs of Statistics 
 -- Description: 	Designed to calculate maximum, minimum, range, median, 

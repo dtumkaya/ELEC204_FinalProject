@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: KoÃ§ University
--- Engineer: Demet TÃ¼mkaya, Mahmut Esat PiÅŸkin
+-- Company: Koç University
+-- Engineer: Demet Tümkaya, Mahmut Esat Piþkin
 -- 
 -- Module Name:   final_code - Behavioral 
 -- Project Name:  ELEC204 - Magical LEDs of Statistics 
@@ -84,7 +84,6 @@ process(Clock)
 				end if;
 			end if;
 		end if;
-
 
 		if(rising_edge(Clock)) then
 			-- calculates min, max, median, range at rising edge of clock

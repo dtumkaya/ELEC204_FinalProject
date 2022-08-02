@@ -1,1 +1,0 @@
--intstyle "ise" -incremental -o "C:/Users/demet/final_project/final_sim_isim_beh.exe" -prj "C:/Users/demet/final_project/final_sim_beh.prj" "work.final_sim" 
